@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dancing Dog 🐕</title>
+
+<style>
+    body{
+        margin:0;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(to bottom,#87ceeb,#ffffff);
+        overflow:hidden;
+        font-family:Arial, sans-serif;
+    }
+
+    .scene{
+        position:relative;
+        width:300px;
+        height:400px;
+    }
+
+    /* Dog Body */
+    .dog{
+        position:absolute;
+        bottom:60px;
+        left:90px;
+        animation:dance 1s infinite alternate ease-in-out;
+    }
+
+    .body{
+        width:120px;
+        height:80px;
+        background:#c68642;
+        border-radius:40px;
+        position:relative;
+    }
+
+    .head{
+        width:70px;
+        height:70px;
+        background:#c68642;
+        border-radius:50%;
+        position:absolute;
+        top:-40px;
+        left:-20px;
+    }
+
+    .ear{
+        width:25px;
+        height:40px;
+        background:#8b5a2b;
+        border-radius:50%;
+        position:absolute;
+        top:-10px;
+    }
+
+    .ear.left{
+        left:5px;
+        transform:rotate(-20deg);
+    }
+
+    .ear.right{
+        right:5px;
+        transform:rotate(20deg);
+    }
+
+    .eye{
+        width:8px;
+        height:8px;
+        background:black;
+        border-radius:50%;
+        position:absolute;
+        top:28px;
+    }
+
+    .eye.left{ left:18px; }
+    .eye.right{ right:18px; }
+
+    .nose{
+        width:14px;
+        height:10px;
+        background:black;
+        border-radius:50%;
+        position:absolute;
+        bottom:12px;
+        left:28px;
+    }
+
+    .tail{
+        width:50px;
+        height:10px;
+        background:#c68642;
+        position:absolute;
+        right:-35px;
+        top:20px;
+        border-radius:10px;
+        transform-origin:left center;
+        animation:wag 0.3s infinite alternate;
+    }
+
+    .leg{
+        width:18px;
+        height:60px;
+        background:#8b5a2b;
+        position:absolute;
+        bottom:-50px;
+        border-radius:10px;
+    }
+
+    .leg1{ left:15px; animation:legDance 0.4s infinite alternate; }
+    .leg2{ left:45px; animation:legDance 0.4s infinite alternate-reverse; }
+    .leg3{ right:45px; animation:legDance 0.4s infinite alternate-reverse; }
+    .leg4{ right:15px; animation:legDance 0.4s infinite alternate; }
+
+    h1{
+        position:absolute;
+        top:20px;
+        width:100%;
+        text-align:center;
+        color:#333;
+    }
+
+    /* Animations */
+    @keyframes dance{
+        0%{
+            transform:translateY(0) rotate(-5deg);
+        }
+        100%{
+            transform:translateY(-20px) rotate(5deg);
+        }
+    }
+
+    @keyframes wag{
+        from{
+            transform:rotate(20deg);
+        }
+        to{
+            transform:rotate(-20deg);
+        }
+    }
+
+    @keyframes legDance{
+        from{
+            transform:rotate(10deg);
+        }
+        to{
+            transform:rotate(-10deg);
+        }
+    }
+
+    .music{
+        position:absolute;
+        font-size:30px;
+        animation:float 2s linear infinite;
+        opacity:0.8;
+    }
+
+    .music:nth-child(1){ left:20px; top:50px; animation-delay:0s; }
+    .music:nth-child(2){ right:30px; top:80px; animation-delay:1s; }
+
+    @keyframes float{
+        from{
+            transform:translateY(0);
+            opacity:1;
+        }
+        to{
+            transform:translateY(-100px);
+            opacity:0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>🐕 Dancing.... 🕺</h1>
+
+<div class="scene">
+
+    <div class="music">🎵</div>
+    <div class="music">🎶</div>
+
+    <div class="dog" id="dog">
+
+        <div class="body">
+
+            <div class="head">
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+
+                <div class="nose"></div>
+            </div>
+
+            <div class="tail"></div>
+
+            <div class="leg leg1"></div>
+            <div class="leg leg2"></div>
+            <div class="leg leg3"></div>
+            <div class="leg leg4"></div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Click to make dog jump
+    const dog = document.getElementById("dog");
+
+    dog.addEventListener("click", () => {
+        dog.style.transform = "translateY(-80px) rotate(15deg)";
+
+        setTimeout(() => {
+            dog.style.transform = "";
+        }, 500);
+    });
+
+    console.log("🐕 Dancing Dog Loaded!");
+</script>
+
+</body>
+</html>
