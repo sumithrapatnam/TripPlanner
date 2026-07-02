@@ -19,7 +19,7 @@ Trip Planner is a smart web application that helps users organize their trips wi
 - CSS3
 - JavaScript
 - PHP
-- MySQL *(if used)*
+- MySQL
 
 ## 📸 Project Preview
 Add screenshots or GIFs of your application here.
