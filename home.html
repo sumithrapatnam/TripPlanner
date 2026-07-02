@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TripPlanner - Modern Travel Website</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .feature-card{
+      background:white;
+      padding:35px 30px;
+      border-radius:22px;
+      transition:0.4s;
+      position:relative;
+      overflow:hidden;
+
+      box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .feature-card::before{
+      content:'';
+      position:absolute;
+      width:120px;
+      height:120px;
+      background:rgba(139,92,246,0.08);
+      border-radius:50%;
+      top:-40px;
+      right:-40px;
+    }
+
+    .feature-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .feature-icon{
+      font-size:2.8rem;
+      margin-bottom:20px;
+    }
+
+    .feature-card h3{
+      margin-bottom:12px;
+    }
+
+    .feature-card p{
+      color:#6b7280;
+      line-height:1.7;
+    }
+
+    /* ================= DESTINATIONS ================= */
+
+    .destinations{
+      background:#f8f5ff;
+    }
+
+    .destination-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:30px;
+    }
+
+    .destination-card{
+      position:relative;
+      height:380px;
+      border-radius:24px;
+      overflow:hidden;
+      cursor:pointer;
+      transition:0.5s;
+      box-shadow:0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .destination-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:0.5s;
+    }
+
+    .destination-card:hover img{
+      transform:scale(1.1);
+    }
+
+    .destination-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,0.75),transparent);
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:25px;
+      color:white;
+    }
+
+    .destination-overlay h3{
+      font-size:2rem;
+      margin-bottom:8px;
+    }
+
+    .destination-overlay p{
+      color:#f1f1f1;
+    }
+
+    /* ================= HOW IT WORKS ================= */
+
+    .steps{
+      background:linear-gradient(to bottom,#F5F3FF,#EDE9FE);
+    }
+
+    .steps-container{
+      max-width:900px;
+      margin:auto;
+    }
+
+    .step{
+      display:flex;
+      align-items:flex-start;
+      gap:25px;
+      margin-bottom:45px;
+    }
+
+    .step-number{
+      min-width:70px;
+      height:70px;
+      border-radius:20px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      font-size:1.5rem;
+      font-weight:700;
+
+      background:linear-gradient(135deg,var(--primary),var(--primary-light));
+
+      box-shadow:0 10px 25px rgba(139,92,246,0.35);
+    }
+
+    .step-content h3{
+      margin-bottom:10px;
+    }
+
+    .step-content p{
+      color:#6b7280;
+      line-height:1.8;
+    }
+
+    /* ================= TESTIMONIALS ================= */
+
+    .testimonials{
+      background:white;
+    }
+
+    .testimonial-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .testimonial-card{
+      background:white;
+      padding:30px;
+      border-radius:22px;
+      transition:0.4s;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .testimonial-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .stars{
+      color:#fbbf24;
+      margin-bottom:15px;
+      font-size:1.1rem;
+    }
+
+    .testimonial-card p{
+      color:#6b7280;
+      line-height:1.8;
+      margin-bottom:20px;
+    }
+
+    .user{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .avatar{
+      width:52px;
+      height:52px;
+      border-radius:50%;
+
+      background:linear-gradient(135deg,var(--primary),var(--primary-light));
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      font-weight:700;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta{
+      text-align:center;
+      color:white;
+
+      background:
+      linear-gradient(135deg,#6D28D9,#8B5CF6,#A78BFA);
+    }
+
+    .cta h2{
+      font-size:2.8rem;
+      margin-bottom:20px;
+    }
+
+    .cta p{
+      max-width:700px;
+      margin:auto;
+      line-height:1.8;
+      margin-bottom:35px;
+      color:#ececec;
+    }
+
+    .cta button{
+      padding:16px 35px;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+      font-size:1rem;
+      font-weight:600;
+      background:white;
+      color:var(--primary);
+      transition:0.4s;
+    }
+
+    .cta button:hover{
+      transform:translateY(-5px);
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer{
+      background:#140F2D;
+      color:#cbd5e1;
+      padding:30px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:20px;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:20px;
+    }
+
+    .footer-links a{
+      color:#cbd5e1;
+    }
+
+    /* ================= ANIMATION ================= */
+
+    @keyframes fadeIn{
+
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media(max-width:900px){
+
+      .hero h1{
+        font-size:2.8rem;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .step{
+        flex-direction:column;
+      }
+
+      footer{
+        flex-direction:column;
+        text-align:center;
+      }
+    }
+
+    @media(max-width:600px){
+
+      .hero h1{
+        font-size:2.2rem;
+      }
+
+      .section-title h2{
+        font-size:2rem;
+      }
+
+      .destination-card{
+        height:300px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav class="navbar">
+
+    <div class="nav-container">
+
+      <div class="logo">✈ TripPlanner</div>
+
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#steps">How It Works</a>
+        <a href="#reviews">Reviews</a>
+        <button class="login-btn" type="button" onclick="openLoginModal()">Login</button>
+        <a href="#" class="nav-btn">Plan Your Trip</a>
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <h1>Plan Your Perfect Trip</h1>
+
+      <p>
+        Discover breathtaking destinations, smart itineraries,
+        personalized travel experiences, and unforgettable memories.
+      </p>
+
+      <button class="hero-btn" onclick="startPlanning()">
+        Start Planning →
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- ================= TRIP PLANNER FORM ================= -->
+
+  <section class="planner-section">
+    <div class="planner-heading">
+      <h2>AI Powered Trip Planner</h2>
+      <p>Enter your current location, destination, trip days and budget. Our AI will create a beautiful personalized travel plan for you.</p>
+    </div>
+
+    <div class="planner-card">
+      <h3><i class="fa-solid fa-magnifying-glass"></i> Plan Your Journey</h3>
+
+      <div class="form-group">
+        <label><i class="fa-solid fa-location-crosshairs"></i> Current Location</label>
+        <input type="text" id="currentLocation" placeholder="e.g., Hyderabad">
+      </div>
+
+      <div class="form-group">
+        <label><i class="fa-solid fa-location-dot"></i> Destination</label>
+        <input type="text" id="destination" placeholder="e.g., Goa">
+      </div>
+
+      <div class="planner-row">
+        <div class="form-group">
+          <label><i class="fa-regular fa-calendar"></i> Number of Days</label>
+          <input type="number" id="days" placeholder="e.g., 5">
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-wallet"></i> Budget</label>
+          <div class="budget-box">
+            <input type="number" id="budget" placeholder="e.g., 20000">
+            <div class="currency-buttons">
+              <button class="currency active-currency" id="usdBtn" type="button">USD</button>
+              <button class="currency" id="inrBtn" type="button">INR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="search-btn" onclick="generateTripPlan()">✨ Generate Trip Plan</button>
+    </div>
+
+    <div class="trip-navigation">
+      <button onclick="scrollToSection('description')">Destination</button>
+      <button onclick="scrollToSection('map-section')">Route Map</button>
+      <button onclick="scrollToSection('weather-section')">Weather</button>
+      <button onclick="scrollToSection('itinerary-section')">Itinerary</button>
+      <button onclick="scrollToSection('budget-section')">Budget</button>
+    </div>
+
+    <div id="trip-output"></div>
+  </section>
+
+  <!-- ================= FEATURES ================= -->
+
+  <section class="features" id="features">
+
+    <div class="section-title">
+      <h2>Why Choose Us</h2>
+      <p>Everything you need for a seamless travel experience</p>
+    </div>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+
+        <div class="feature-icon">🌍</div>
+
+        <h3>Smart Destinations</h3>
+
+        <p>
+          Get destination recommendations based on your interests and preferences.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <div class="feature-icon">💰</div>
+
+        <h3>Budget Planning</h3>
+
+        <p>
+          Organize your travel expenses and optimize your budget efficiently.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <div class="feature-icon">🏨</div>
+
+        <h3>Best Hotels</h3>
+
+        <p>
+          Find premium hotels and comfortable stays with trusted ratings.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <div class="feature-icon">🗺</div>
+
+        <h3>Interactive Itinerary</h3>
+
+        <p>
+          Create a detailed trip schedule with maps and attractions.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+    <!-- ================= BUDGET FORM ================= -->
+
+  <section class="budget-form-section" id="budget-form">
+
+    <div class="budget-form-card">
+
+      <h3>Tell us your travel budget</h3>
+
+      <p>Share your budget details and we’ll help you plan a trip that fits your needs.</p>
+
+      <form class="budget-form">
+
+        <div class="budget-form-grid">
+          <div class="budget-form-group">
+            <label for="budget">Your Budget</label>
+            <input id="budget" type="number" placeholder="e.g. 25000">
+          </div>
+          <div class="budget-form-group">
+            <label for="travelers">Travelers</label>
+            <select id="travelers">
+              <option>Select No of Travelers</option>
+              <option>1 Traveler</option>
+              <option>2 Travelers</option>
+              <option>3 Travelers</option>
+              <option>4+ Travelers</option>
+            </select>
+          </div>
+
+          <div class="budget-form-group">
+            <label for="trip-style">Trip Style</label>
+            <select id="trip-style">
+              <option>Select Trip Style</option>
+              <option>Adventurous</option>
+              <option>Devotional</option>
+              <option>Beach</option>
+              <option>Mountain</option>
+              <option>Historical</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="budget-form-actions">
+          <button type="button" onclick="window.location.href='service_request.html'">Get Budget Plan</button>
+        </div>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= DESTINATIONS ================= -->
+
+<section class="destinations" id="destinations">
+
+  <div class="section-title">
+
+    <h2>Explore Famous Places In India</h2>
+
+    <p>
+      Discover the beauty, culture, heritage, and adventures across India
+    </p>
+
+  </div>
+
+  <div class="destination-grid">
+
+    <!-- TAJ MAHAL -->
+
+    <div class="destination-card">
+
+      <img 
+      src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1974&auto=format&fit=crop" 
+      alt="Taj Mahal">
+
+      <div class="destination-overlay">
+
+        <h3>Agra</h3>
+
+        <p>Home of the iconic Taj Mahal</p>
+
+      </div>
+
+    </div>
+
+    <!-- JAIPUR -->
+
+    <div class="destination-card">
+
+      <img 
+      src="https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=1974&auto=format&fit=crop" 
+      alt="Jaipur">
+
+      <div class="destination-overlay">
+
+        <h3>Jaipur</h3>
+
+        <p>The royal Pink City of India</p>
+
+      </div>
+
+    </div>
+
+    <!-- KERALA -->
+
+    <div class="destination-card">
+
+      <img 
+      src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1974&auto=format&fit=crop" 
+      alt="Kerala">
+
+      <div class="destination-overlay">
+
+        <h3>Kerala</h3>
+
+        <p>Experience serene backwaters and nature</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+
+  <section class="steps" id="steps">
+
+    <div class="section-title">
+
+      <h2>How It Works</h2>
+
+      <p>Plan your perfect trip in five simple steps</p>
+
+    </div>
+
+    <div class="steps-container">
+
+      <div class="step">
+
+        <div class="step-number">01</div>
+
+        <div class="step-content">
+
+          <h3>Choose Your Destination</h3>
+
+          <p>
+            Tell us where you want to go and your preferred travel dates.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="step">
+
+        <div class="step-number">02</div>
+
+        <div class="step-content">
+
+          <h3>Set Your Budget</h3>
+
+          <p>
+            Define your budget and receive optimized travel options.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="step">
+
+        <div class="step-number">03</div>
+
+        <div class="step-content">
+
+          <h3>Get Recommendations</h3>
+
+          <p>
+            Explore hotels, restaurants, activities, and tourist attractions.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="step">
+
+        <div class="step-number">04</div>
+
+        <div class="step-content">
+
+          <h3>Review Your Itinerary</h3>
+
+          <p>
+            View your detailed travel plan with maps and schedules.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="step">
+
+        <div class="step-number">05</div>
+
+        <div class="step-content">
+
+          <h3>Start Your Adventure</h3>
+
+          <p>
+            Book your trip and create unforgettable travel memories.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+
+  <section class="testimonials" id="reviews">
+
+    <div class="section-title">
+
+      <h2>What Travelers Say</h2>
+
+      <p>Thousands of happy travelers trust TripPlanner</p>
+
+    </div>
+
+    <div class="testimonial-grid">
+
+      <div class="testimonial-card">
+
+        <div class="stars">★★★★★</div>
+
+        <p>
+          TripPlanner made my Europe tour stress-free and beautifully organized.
+        </p>
+
+        <div class="user">
+
+          <div class="avatar">MC</div>
+
+          <div>
+            <h4>Maya Chen</h4>
+            <small>San Francisco</small>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="testimonial-card">
+
+        <div class="stars">★★★★★</div>
+
+        <p>
+          The recommendations were excellent and saved me hours of planning.
+        </p>
+
+        <div class="user">
+
+          <div class="avatar">RP</div>
+
+          <div>
+            <h4>Raj Patel</h4>
+            <small>Mumbai</small>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="testimonial-card">
+
+        <div class="stars">★★★★★</div>
+
+        <p>
+          Beautiful UI, smooth experience, and excellent itinerary features.
+        </p>
+
+        <div class="user">
+
+          <div class="avatar">LT</div>
+
+          <div>
+            <h4>Lucia Torres</h4>
+            <small>Barcelona</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= CTA ================= -->
+
+  <section class="cta">
+
+    <h2>Ready To Explore The World?</h2>
+
+    <p>
+      Create your personalized travel itinerary in minutes and enjoy smarter travel planning.
+    </p>
+
+    <button onclick="startPlanning()">
+      Start Planning Now →
+    </button>
+
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div>
+      ✈ TripPlanner
+    </div>
+
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Support</a>
+    </div>
+
+    <div>
+      © 2025 TripPlanner. All rights reserved.
+    </div>
+
+  </footer>
+
+  <div class="login-modal" id="loginModal">
+    <div class="login-modal-content">
+      <button class="modal-close" type="button" onclick="closeLoginModal()">×</button>
+      <div class="auth-toggle">
+        <button type="button" class="active" id="loginTab" onclick="showAuthForm('login')">Login</button>
+        <button type="button" id="registerTab" onclick="showAuthForm('register')">Register</button>
+      </div>
+
+      <div id="loginFormBox">
+        <h3>Welcome Back</h3>
+        <p>Log in to continue planning your trip.</p>
+        <form class="login-form">
+          <input type="email" placeholder="Email address" required>
+          <input type="password" placeholder="Password" required>
+          <button type="submit">Login</button>
+          <p class="small-text">New here? Create an account to get started.</p>
+        </form>
+      </div>
+
+      <div id="registerFormBox" class="hidden">
+        <h3>Create Account</h3>
+        <p>Sign up and start planning your next adventure.</p>
+        <form class="login-form">
+          <input type="text" placeholder="Full name" required>
+          <input type="email" placeholder="Email address" required>
+          <input type="password" placeholder="Password" required>
+          <button type="submit">Register</button>
+          <p class="small-text">Already have an account? Login instead.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    function startPlanning(){
+      window.location.href = "service_request.html";
+    }
+
+    function openLoginModal(){
+      document.getElementById('loginModal').classList.add('active');
+    }
+
+    function closeLoginModal(){
+      document.getElementById('loginModal').classList.remove('active');
+      showAuthForm('login');
+    }
+
+    function showAuthForm(type){
+      const loginBox = document.getElementById('loginFormBox');
+      const registerBox = document.getElementById('registerFormBox');
+      const loginTab = document.getElementById('loginTab');
+      const registerTab = document.getElementById('registerTab');
+
+      if(type === 'register'){
+        loginBox.classList.add('hidden');
+        registerBox.classList.remove('hidden');
+        loginTab.classList.remove('active');
+        registerTab.classList.add('active');
+      } else {
+        loginBox.classList.remove('hidden');
+        registerBox.classList.add('hidden');
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+      }
+    }
+
+    document.addEventListener('click', function(event){
+      const modal = document.getElementById('loginModal');
+      if(event.target === modal){
+        closeLoginModal();
+      }
+    });
+
+    window.addEventListener("scroll", function(){
+      const navbar = document.querySelector(".navbar");
+      if(window.scrollY > 50){
+        navbar.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)";
+      }
+      else{
+        navbar.style.boxShadow = "0 2px 15px rgba(0,0,0,0.08)";
+      }
+    });
+
+  </script>
+
+  <script src="service_request.js"></script>
+
+</body>
+</html>
